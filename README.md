@@ -125,19 +125,19 @@ Use the UI refresh action to re-index knowledge after adding/updating files.
 
 ## Build .env in root directory
 
-OPENAI_API_KEY=Your API Key
-OPENAI_BASE_URL=https://api.groq.com/openai/v1
-OPENAI_MODEL=llama-3.3-70b-versatile
-LLM_PROVIDER=groq
-LLM_MODEL=llama-3.3-70b-versatile
-EMBEDDING_PROVIDER=huggingface
-EMBEDDING_MODEL=sentence-transformers/all-MiniLM-L6-v2
-RERANKER_TYPE=llm
-DATABASE_URL=mysql+pymysql://root:@127.0.0.1:3310/smartphone
-TEXT_FILES_DIR=data/text_files
-MAX_CHUNK_SIZE=900
-CHUNK_OVERLAP=120
-TOP_K=6
-DJANGO_SECRET_KEY=change_me_for_production
-DJANGO_DEBUG=true
-DJANGO_ALLOWED_HOSTS=*
+-OPENAI_API_KEY=Your API Key
+-OPENAI_BASE_URL=https://api.groq.com/openai/v1
+-OPENAI_MODEL=llama-3.3-70b-versatile
+-LLM_PROVIDER=groq
+-LLM_MODEL=llama-3.3-70b-versatile
+-EMBEDDING_PROVIDER=huggingface
+-EMBEDDING_MODEL=sentence-transformers/all-MiniLM-L6-v2
+-RERANKER_TYPE=llm
+-DATABASE_URL=mysql+pymysql://root:@127.0.0.1:3310/smartphone
+-TEXT_FILES_DIR=data/text_files
+-MAX_CHUNK_SIZE=900
+-CHUNK_OVERLAP=120
+-TOP_K=6
+-DJANGO_SECRET_KEY=change_me_for_production
+-DJANGO_DEBUG=true
+-DJANGO_ALLOWED_HOSTS=*
