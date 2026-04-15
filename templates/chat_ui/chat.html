@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Context-Aware RAG Chatbot</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f5f7fb;
+      }
+      .container {
+        max-width: 980px;
+        margin: 24px auto;
+        padding: 0 16px;
+      }
+      .header {
+        background: #0f172a;
+        color: white;
+        padding: 16px;
+        border-radius: 12px;
+        margin-bottom: 16px;
+      }
+      .actions {
+        display: flex;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      .chat-box {
+        background: white;
+        border: 1px solid #dbe3ef;
+        border-radius: 12px;
+        padding: 16px;
+        min-height: 420px;
+      }
+      .msg {
+        margin-bottom: 12px;
+        padding: 12px;
+        border-radius: 10px;
+        white-space: pre-wrap;
+      }
+      .user {
+        background: #e0ecff;
+      }
+      .assistant {
+        background: #eefaf0;
+      }
+      textarea {
+        width: 100%;
+        border-radius: 10px;
+        border: 1px solid #b8c7dd;
+        min-height: 90px;
+        margin-top: 12px;
+        padding: 10px;
+        font-family: inherit;
+        resize: vertical;
+      }
+      button {
+        border: none;
+        background: #1d4ed8;
+        color: white;
+        padding: 10px 14px;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+      .secondary {
+        background: #475569;
+      }
+      .danger {
+        background: #b91c1c;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h2>Fully Context-Aware RAG Chatbot</h2>
+        <div>Uses: text files + entire database content + chat memory</div>
+      </div>
+
+      <div class="actions">
+        <form action="/refresh/" method="post">
+          {% csrf_token %}
+          <button type="submit" class="secondary">Refresh Knowledge</button>
+        </form>
+        <form action="/clear/" method="post">
+          {% csrf_token %}
+          <button type="submit" class="danger">Clear Chat</button>
+        </form>
+      </div>
+
+      <div class="chat-box">
+        {% if history %}
+          {% for item in history %}
+            <div class="msg {% if item.role == 'user' %}user{% else %}assistant{% endif %}">
+              <strong>{{ item.role|title }}:</strong>
+              {{ item.content }}
+            </div>
+          {% endfor %}
+        {% else %}
+          <div class="msg assistant">
+            <strong>Assistant:</strong>
+            Ask a question. Add docs in <code>data/text_files</code> and refresh.
+          </div>
+        {% endif %}
+      </div>
+
+      <form action="/ask/" method="post">
+        {% csrf_token %}
+        <textarea
+          name="question"
+          placeholder="Ask anything using your documents and database..."
+          required
+        ></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </body>
+</html>
